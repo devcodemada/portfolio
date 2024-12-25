@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '~/components/visually-hidden';
 import { useReducedMotion, useSpring } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { delay } from '~/utils/delay';
 import { classes } from '~/utils/style';
 import styles from './decoder-text.module.css';

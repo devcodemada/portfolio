@@ -1,3 +1,4 @@
+import { createCookieSessionStorage, json } from '@remix-run/cloudflare';
 import {
   Links,
   Meta,
@@ -9,19 +10,17 @@ import {
   useNavigation,
   useRouteError,
 } from '@remix-run/react';
-import { createCookieSessionStorage, json } from '@remix-run/cloudflare';
-import { ThemeProvider, themeStyles } from '~/components/theme-provider';
 import GothamBook from '~/assets/fonts/gotham-book.woff2';
 import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
-import { useEffect } from 'react';
-import { Error } from '~/layouts/error';
-import { VisuallyHidden } from '~/components/visually-hidden';
-import { Navbar } from '~/layouts/navbar';
 import { Progress } from '~/components/progress';
+import { ThemeProvider, themeStyles } from '~/components/theme-provider';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import config from '~/config.json';
-import styles from './root.module.css';
-import './reset.module.css';
+import { Error } from '~/layouts/error';
+import { Navbar } from '~/layouts/navbar';
 import './global.module.css';
+import './reset.module.css';
+import styles from './root.module.css';
 
 export const links = () => [
   {
@@ -92,13 +91,6 @@ export default function App() {
       { action: '/api/set-theme', method: 'post' }
     );
   }
-
-  useEffect(() => {
-    console.info(
-      `${config.ascii}\n`,
-      `Taking a peek huh? Check out the source code: ${config.repo}\n\n`
-    );
-  }, []);
 
   return (
     <html lang="en">

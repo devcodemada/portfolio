@@ -1,9 +1,8 @@
 {
   "name": "portfolio",
   "homepage": "https://hamishw.com",
-  "description": "Portfolio site for Hamish Williams",
-  "repository": "https://github.com/HamishMW/portfolio.git",
-  "author": "Hamish Williams",
+  "description": "Portfolio site for Devcodemada",
+  "author": "Devcodemada",
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -18,6 +17,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.515.0",
+    "@emailjs/browser": "^4.4.1",
     "@mdx-js/react": "^3.0.1",
     "@remix-run/cloudflare": "^2.7.1",
     "@remix-run/cloudflare-pages": "^2.7.1",
@@ -25,6 +25,7 @@
     "framer-motion": "11.0.5",
     "isbot": "^4.1.0",
     "miniflare": "^3.20231030.4",
+    "nodemailer": "^6.9.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-img-size": "^1.0.1",
