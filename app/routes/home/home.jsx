@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
+import {
+  default as gamestackTexture,
+  default as gamestackTextureLarge,
+} from '~/assets/athena-checkin.png';
+import {
+  default as gamestackTexture2,
+  default as gamestackTexture2Large,
+} from '~/assets/athena-dashboard.png';
 import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
 import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
+import { default as plutoMobileDashboardTexture } from '~/assets/pluto-mobile-enduser-old.png';
+import { default as plutoMobileLoginTexture } from '~/assets/pluto-mobile-old.png';
 import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
@@ -124,10 +127,10 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
+        title="Attendance tracking"
+        description="A mobile app for attendance tracking and employee management with a focus on user experience called Athena-Z"
         buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        buttonLink="https://repo.pt-bks.com/athena/"
         model={{
           type: 'phone',
           alt: 'App login screen',
@@ -148,17 +151,21 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="Salesperson mobile app"
+        description="Design and development for a salesperson mobile app built in React Native called Pluto"
         buttonText="View project"
-        buttonLink="/projects/slice"
+        buttonLink="/projects/pluto-mobile"
         model={{
-          type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          type: 'phone',
+          alt: 'App login screen',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              srcSet: `${plutoMobileDashboardTexture} 375w, ${plutoMobileDashboardTexture} 750w`,
+              placeholder: gamestackTexture2Placeholder,
+            },
+            {
+              srcSet: `${plutoMobileLoginTexture} 375w, ${plutoMobileLoginTexture} 750w`,
+              placeholder: gamestackTexturePlaceholder,
             },
           ],
         }}

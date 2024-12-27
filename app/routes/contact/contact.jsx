@@ -1,4 +1,3 @@
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import { json } from '@remix-run/cloudflare';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { useRef } from 'react';
@@ -31,14 +30,6 @@ const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
 export async function action({ context, request }) {
-  const ses = new SESClient({
-    region: 'us-east-1',
-    credentials: {
-      accessKeyId: context.cloudflare.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: context.cloudflare.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-
   const formData = await request.formData();
   const isBot = String(formData.get('name'));
   const email = String(formData.get('email'));
@@ -70,27 +61,79 @@ export async function action({ context, request }) {
   }
 
   // Send email via Amazon SES
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [context.cloudflare.env.EMAIL],
-      },
-      Message: {
-        Body: {
-          Text: {
-            Data: `From: ${email}\n\n${message}`,
-          },
-        },
-        Subject: {
-          Data: `Portfolio message from ${email}`,
-        },
-      },
-      Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
-      ReplyToAddresses: [email],
-    })
-  );
+  // await ses.send(
+  //   new SendEmailCommand({
+  //     Destination: {
+  //       ToAddresses: [context.cloudflare.env.EMAIL],
+  //     },
+  //     Message: {
+  //       Body: {
+  //         Text: {
+  //           Data: `From: ${email}\n\n${message}`,
+  //         },
+  //       },
+  //       Subject: {
+  //         Data: `Portfolio message from ${email}`,
+  //       },
+  //     },
+  //     Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
+  //     ReplyToAddresses: [email],
+  //   })
+  // );
+  try {
+    await sendMail(
+      context.cloudflare.env.MAILJET_API_KEY,
+      context.cloudflare.env.MAILJET_SECRET_KEY,
+      context.cloudflare.env.TO_EMAIL,
+      context.cloudflare.env.TO_EMAIL,
+      context.cloudflare.env.EMAIL,
+      email,
+      '<Portfolio> - ' + email,
+      message
+    );
 
-  return json({ success: true });
+    return json({ success: true });
+  } catch (error) {
+    console.error(error);
+    return json({ errors: { email: 'Failed to send message. Please try again.' } });
+  }
+}
+
+async function sendMail(
+  apiKey,
+  secretKey,
+  name,
+  email,
+  fromEmail,
+  fromEmails,
+  subject,
+  message
+) {
+  const myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.set('Authorization', 'Basic ' + btoa(apiKey + ':' + secretKey));
+
+  const data = JSON.stringify({
+    Messages: [
+      {
+        From: { Email: fromEmail, Name: fromEmails },
+        To: [{ Email: email, Name: name }],
+        Subject: subject,
+        TextPart: `From: ${fromEmails}\n\n${message}`,
+      },
+    ],
+  });
+
+  const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: data,
+  };
+
+  fetch('https://api.mailjet.com/v3.1/send', requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
 
 export const Contact = () => {
