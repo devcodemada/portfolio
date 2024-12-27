@@ -7,10 +7,14 @@ import {
   default as gamestackTexture2,
   default as gamestackTexture2Large,
 } from '~/assets/athena-dashboard.png';
+import bksCompanyWebsiteTexture from '~/assets/bks-company-profile.png';
 import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
 import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
 import { default as plutoMobileDashboardTexture } from '~/assets/pluto-mobile-enduser-old.png';
 import { default as plutoMobileLoginTexture } from '~/assets/pluto-mobile-old.png';
+import plutoPocketAITexture from '~/assets/pluto-pocket-chat-ai.jpg';
+import plutoPocketTexture from '~/assets/pluto-pocket-dashboard.jpg';
+import smmCompanyWebsiteTexture from '~/assets/smm-company-profile.png';
 import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
@@ -56,10 +60,22 @@ export const Home = () => {
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
+  const projectFour = useRef();
+  const projectFive = useRef();
+  const projectSix = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [
+      intro,
+      projectOne,
+      projectTwo,
+      projectThree,
+      projectFour,
+      projectFive,
+      projectSix,
+      details,
+    ];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -151,7 +167,28 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Salesperson mobile app"
+        title="BKS company website"
+        description="Company website for Berca Kawan Sejati, a company that provides solutions for the growing cigarette distribution in Indonesia"
+        buttonText="View website"
+        buttonLink="https://www.pt-bks.com/"
+        model={{
+          type: 'laptop',
+          alt: 'Pluto sales dashboard',
+          textures: [
+            {
+              srcSet: `${bksCompanyWebsiteTexture} 1280w, ${bksCompanyWebsiteTexture} 2560w`,
+              placeholder: sprTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-4"
+        alternate
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
+        index={4}
+        title="Salesperson reporting platform"
         description="Design and development for a salesperson mobile app built in React Native called Pluto"
         buttonText="View project"
         buttonLink="/projects/pluto-mobile"
@@ -165,6 +202,50 @@ export const Home = () => {
             },
             {
               srcSet: `${plutoMobileLoginTexture} 375w, ${plutoMobileLoginTexture} 750w`,
+              placeholder: gamestackTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-5"
+        sectionRef={projectFive}
+        visible={visibleSections.includes(projectFive.current)}
+        index={5}
+        title="SMM company website"
+        description="Company website for Berca Kawan Sejati, a company that provides solutions for the growing cigarette industry in Indonesia"
+        buttonText="View website"
+        buttonLink="https://pt-smm.com/"
+        model={{
+          type: 'laptop',
+          alt: 'Pluto sales dashboard',
+          textures: [
+            {
+              srcSet: `${smmCompanyWebsiteTexture} 1280w, ${smmCompanyWebsiteTexture} 2560w`,
+              placeholder: sprTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-6"
+        alternate
+        sectionRef={projectSix}
+        visible={visibleSections.includes(projectSix.current)}
+        index={6}
+        title="Pluto Pocket edition"
+        description="Develop a mobile app for salesperson to manage their sales and customer data with a focus on user experience called Pluto Pocket. AI chatbot included."
+        buttonText="Under development"
+        model={{
+          type: 'phone',
+          alt: 'App login screen',
+          textures: [
+            {
+              srcSet: `${plutoPocketTexture} 375w, ${plutoPocketTexture} 750w`,
+              placeholder: gamestackTexture2Placeholder,
+            },
+            {
+              srcSet: `${plutoPocketAITexture} 375w, ${plutoPocketAITexture} 750w`,
               placeholder: gamestackTexturePlaceholder,
             },
           ],
