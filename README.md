@@ -1,1 +1,1 @@
-[![Site preview](/public/site-preview.png)](https://devcodemada.my.id)
+[![Site preview](/public/image.png)](https://devcodemada.my.id)
